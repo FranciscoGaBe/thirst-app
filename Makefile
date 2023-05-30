@@ -7,6 +7,9 @@ down:
 
 up: .up-api .up-webapp
 
+migrate: .deps-api
+	docker-compose run -v "${PWD}/api:/opt/app" node yarn migrate
+
 test: .test-api .test-webapp
 
 coverage: .coverage-api .coverage-webapp

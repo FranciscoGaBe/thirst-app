@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node-dev --respawn src/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "migrate": "ts-node src/migrateJson.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
