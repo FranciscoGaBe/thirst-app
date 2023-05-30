@@ -1,5 +1,5 @@
 export type DatabaseName = string
-export type DatabaseMigrationService<Record = unknown> = {
+export interface DatabaseMigrationService<Record = unknown> {
   createDatabase: (databaseName: DatabaseName) => boolean
   addRecord: (databaseName: DatabaseName, record: Record) => boolean
 }

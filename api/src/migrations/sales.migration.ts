@@ -1,10 +1,10 @@
-import { type Migration } from "../databaseMigration"
+import { type Migration } from '../databaseMigration'
 
-type SaleRecord = {
-  id: number,
-  drinkId: number,
-  quantity: number,
-  profit: number,
+interface SaleRecord {
+  id: number
+  drinkId: number
+  quantity: number
+  profit: number
 }
 
 const salesMigration: Migration<SaleRecord> = ({ createDatabase }) => {

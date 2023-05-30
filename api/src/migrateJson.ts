@@ -17,7 +17,7 @@ const createDatabaseFolder = (rootPath: FolderPath): FolderPath => {
   return databaseFolderPath
 }
 
-const getMigrations = (rootPath: FolderPath) => {
+const getMigrations = (rootPath: FolderPath): FilePath[] => {
   const migrationsFolderPath = path.join(rootPath, 'src', 'migrations')
 
   if (!fs.existsSync(migrationsFolderPath)) {
@@ -28,7 +28,7 @@ const getMigrations = (rootPath: FolderPath) => {
 }
 
 const createMigrationService = (databaseFolderPath: FolderPath): DatabaseMigrationService => {
-  const getDatabasePath = (databaseName: FolderPath) => {
+  const getDatabasePath = (databaseName: FolderPath): FilePath => {
     return path.join(databaseFolderPath, `${databaseName}.json`)
   }
 
@@ -68,18 +68,20 @@ const createMigrationService = (databaseFolderPath: FolderPath): DatabaseMigrati
   }
 }
 
-const runMigrations = (migrations: FilePath[], databaseFolderPath: FolderPath) => {
-  migrations.forEach(migrationFilePath => {
-    const runMigration = require(migrationFilePath).default as Migration<unknown>
+const runMigrations = async (migrations: FilePath[], databaseFolderPath: FolderPath): Promise<void> => {
+  const promises = migrations.map(async migrationFilePath => {
+    const runMigration = (await import(migrationFilePath)).default as Migration<unknown>
     runMigration(createMigrationService(databaseFolderPath))
   })
+
+  await Promise.all(promises)
 }
 
-const migrateJson = () => {
+const migrateJson = (): void => {
   const rootPath = path.join(__dirname, '..')
   const databaseFolderPath = createDatabaseFolder(rootPath)
   const migrations = getMigrations(rootPath)
-  runMigrations(migrations, databaseFolderPath)
+  void runMigrations(migrations, databaseFolderPath)
 }
 
 migrateJson()

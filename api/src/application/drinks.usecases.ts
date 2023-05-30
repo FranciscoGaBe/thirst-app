@@ -1,7 +1,7 @@
-import { DataRepository } from "../domain"
-import { Drink } from "../domain/drink.entity"
+import { type DataRepository } from '../domain'
+import { type Drink } from '../domain/drink.entity'
 
-type DrinksUseCases = {
+interface DrinksUseCases {
   getAllDrinks: () => Drink[]
 }
 

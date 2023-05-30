@@ -1,5 +1,5 @@
-import { DrinkRepository } from "./drink.repository"
+import { type DrinkRepository } from './drink.repository'
 
-export type DataRepository = {
+export interface DataRepository {
   drinks: DrinkRepository
 }

@@ -1,8 +1,8 @@
 import fs from 'node:fs'
 
-import { Drink } from "../../../domain/drink.entity"
-import { DrinkRepository } from "../../../domain/drink.repository"
-import { getAllDrinks } from "./getAllDrinks"
+import { type Drink } from '../../../domain/drink.entity'
+import { type DrinkRepository } from '../../../domain/drink.repository'
+import { getAllDrinks } from './getAllDrinks'
 import { getDrinksDatabasePath } from './getDrinksDatabasePath'
 
 export const updateDrink: DrinkRepository['update'] = (id, partialDrink) => {
@@ -16,7 +16,7 @@ export const updateDrink: DrinkRepository['update'] = (id, partialDrink) => {
   const updatedDrink: Drink = {
     ...drinks[index],
     ...partialDrink,
-    id,
+    id
   }
 
   fs.writeFileSync(
@@ -27,7 +27,7 @@ export const updateDrink: DrinkRepository['update'] = (id, partialDrink) => {
       ...drinks.slice(index + 1)
     ]),
     {
-      encoding: 'utf-8',
+      encoding: 'utf-8'
     }
   )
 

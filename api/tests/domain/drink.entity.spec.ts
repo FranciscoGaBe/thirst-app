@@ -9,7 +9,7 @@ describe('drink entity', () => {
         quantity: 0,
         price: 0,
         cost: 0,
-        image: '',
+        image: ''
       })
     })
 
@@ -23,7 +23,7 @@ describe('drink entity', () => {
         quantity: 0,
         price: 0,
         cost: 0,
-        image: '',
+        image: ''
       })
     })
   })
@@ -32,11 +32,11 @@ describe('drink entity', () => {
     it('returns given drink with updated quantity', () => {
       const drink: Drink = Object.freeze({
         ...createDrink(),
-        quantity: 10,
+        quantity: 10
       })
       expect(substractQuantity(drink, 3)).toEqual({
         ...drink,
-        quantity: 7,
+        quantity: 7
       })
     })
 

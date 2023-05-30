@@ -4,7 +4,7 @@ import { getDrinksDatabasePath } from '../../../src/infrastructure/services/fs-d
 const mockDrinks = Object.freeze([
   Object.freeze({ id: 1, name: 'test' }),
   Object.freeze({ id: 2, name: 'test 2' }),
-  Object.freeze({ id: 3, name: 'test 3' }),
+  Object.freeze({ id: 3, name: 'test 3' })
 ])
 
 const mockReadFileSync = jest.fn((..._: unknown[]) => {
@@ -14,8 +14,6 @@ const mockReadFileSync = jest.fn((..._: unknown[]) => {
 const mockWriteFileSync = jest.fn()
 
 jest.mock('node:fs', () => {
-  const fs = jest.requireActual('node:fs')
-
   return {
     readFileSync: (...args: unknown[]) => {
       return mockReadFileSync(...args)
@@ -38,7 +36,7 @@ describe('FSDrinkRepositoryService', () => {
       expect(mockReadFileSync).toHaveBeenCalledTimes(1)
       expect(mockReadFileSync).toHaveBeenCalledWith(
         getDrinksDatabasePath(),
-        expect.anything(),
+        expect.anything()
       )
       expect(drinks).toEqual(mockDrinks)
     })
@@ -51,7 +49,7 @@ describe('FSDrinkRepositoryService', () => {
       expect(mockReadFileSync).toHaveBeenCalledTimes(1)
       expect(mockReadFileSync).toHaveBeenCalledWith(
         getDrinksDatabasePath(),
-        expect.anything(),
+        expect.anything()
       )
       expect(drink).toEqual(mockDrink)
     })
@@ -61,7 +59,7 @@ describe('FSDrinkRepositoryService', () => {
       expect(mockReadFileSync).toHaveBeenCalledTimes(1)
       expect(mockReadFileSync).toHaveBeenCalledWith(
         getDrinksDatabasePath(),
-        expect.anything(),
+        expect.anything()
       )
       expect(drink).toEqual(null)
     })
@@ -73,12 +71,12 @@ describe('FSDrinkRepositoryService', () => {
       const drink = FSDrinkRepositoryService.update(mockDrink.id, { quantity: 2 })
       const expectedDrink = {
         ...mockDrink,
-        quantity: 2,
+        quantity: 2
       }
       expect(mockReadFileSync).toHaveBeenCalledTimes(1)
       expect(mockReadFileSync).toHaveBeenCalledWith(
         getDrinksDatabasePath(),
-        expect.anything(),
+        expect.anything()
       )
       expect(mockWriteFileSync).toHaveBeenCalledTimes(1)
       expect(mockWriteFileSync).toHaveBeenCalledWith(
@@ -86,9 +84,9 @@ describe('FSDrinkRepositoryService', () => {
         JSON.stringify([
           mockDrinks[0],
           expectedDrink,
-          mockDrinks[2],
+          mockDrinks[2]
         ]),
-        expect.anything(),
+        expect.anything()
       )
       expect(drink).toEqual(expectedDrink)
     })
@@ -98,7 +96,7 @@ describe('FSDrinkRepositoryService', () => {
       expect(mockReadFileSync).toHaveBeenCalledTimes(1)
       expect(mockReadFileSync).toHaveBeenCalledWith(
         getDrinksDatabasePath(),
-        expect.anything(),
+        expect.anything()
       )
       expect(mockWriteFileSync).not.toHaveBeenCalled()
       expect(drink).toEqual(null)

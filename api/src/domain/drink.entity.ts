@@ -1,10 +1,10 @@
-export type Drink = {
-  id: number,
-  name: string,
-  price: number,
-  cost: number,
-  quantity: number,
-  image: string,
+export interface Drink {
+  id: number
+  name: string
+  price: number
+  cost: number
+  quantity: number
+  image: string
 }
 
 export const createDrink = (drink: Partial<Drink> = {}): Drink => {
@@ -15,14 +15,14 @@ export const createDrink = (drink: Partial<Drink> = {}): Drink => {
     cost: 0,
     quantity: 0,
     image: '',
-    ...drink,
+    ...drink
   }
 }
 
 /**
  * Substract quantity to drink quantity
- * @param drink 
- * @param substractQuantity 
+ * @param drink
+ * @param substractQuantity
  * @returns drink with updated quantity or null if not enough quantity left
  */
 export const substractQuantity = (drink: Drink, substractQuantity: number): Drink | null => {
@@ -33,6 +33,6 @@ export const substractQuantity = (drink: Drink, substractQuantity: number): Drin
 
   return {
     ...drink,
-    quantity: newQuantity,
+    quantity: newQuantity
   }
 }

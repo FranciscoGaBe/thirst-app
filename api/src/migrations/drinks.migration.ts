@@ -1,12 +1,12 @@
-import { type Migration } from "../databaseMigration"
+import { type Migration } from '../databaseMigration'
 
-type DrinkRecord = {
-  id: number,
-  name: string,
-  price: number,
-  cost: number,
-  quantity: number,
-  image: string,
+interface DrinkRecord {
+  id: number
+  name: string
+  price: number
+  cost: number
+  quantity: number
+  image: string
 }
 
 const drinksMigration: Migration<DrinkRecord> = ({ createDatabase, addRecord }) => {
@@ -20,7 +20,7 @@ const drinksMigration: Migration<DrinkRecord> = ({ createDatabase, addRecord }) 
     price: 1,
     cost: 0.2,
     quantity: 20,
-    image: 'water.jpg',
+    image: 'water.jpg'
   })
 
   addRecord(database, {
@@ -29,7 +29,7 @@ const drinksMigration: Migration<DrinkRecord> = ({ createDatabase, addRecord }) 
     price: 2,
     cost: 1,
     quantity: 10,
-    image: 'cola.jpg',
+    image: 'cola.jpg'
   })
 
   addRecord(database, {
@@ -38,7 +38,7 @@ const drinksMigration: Migration<DrinkRecord> = ({ createDatabase, addRecord }) 
     price: 1.5,
     cost: 0.4,
     quantity: 5,
-    image: 'orange-juice.jpg',
+    image: 'orange-juice.jpg'
   })
 
   return true
