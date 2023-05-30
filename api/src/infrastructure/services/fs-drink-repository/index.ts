@@ -3,8 +3,10 @@ import { getAllDrinks } from './getAllDrinks'
 import { getDrinkById } from './getDrinkById'
 import { updateDrink } from './updateDrink'
 
-export const FSDrinkRepositoryService: DrinkRepository = {
-  getAll: getAllDrinks,
-  getById: getDrinkById,
-  update: updateDrink
+export const createFSDrinkRepositoryService = (): DrinkRepository => {
+  return {
+    getAll: getAllDrinks,
+    getById: getDrinkById,
+    update: updateDrink
+  }
 }
