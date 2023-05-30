@@ -9,10 +9,11 @@ type FilePath = string
 const createDatabaseFolder = (rootPath: FolderPath): FolderPath => {
   const databaseFolderPath = path.join(rootPath, 'database')
 
-  if (!fs.existsSync(databaseFolderPath)) {
-    fs.mkdirSync(databaseFolderPath)
+  if (fs.existsSync(databaseFolderPath)) {
+    fs.rmSync(databaseFolderPath, { force: true, recursive: true })
   }
 
+  fs.mkdirSync(databaseFolderPath)
   return databaseFolderPath
 }
 
