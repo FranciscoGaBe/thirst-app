@@ -1,4 +1,4 @@
-import { Drink, createDrink } from '../../src/domain/drink.entity'
+import { type Drink, createDrink, substractQuantity } from '../../src/domain/drink.entity'
 
 describe('drink entity', () => {
   describe('createDrink', () => {
@@ -25,6 +25,24 @@ describe('drink entity', () => {
         cost: 0,
         image: '',
       })
+    })
+  })
+
+  describe('substractQuantity', () => {
+    it('returns given drink with updated quantity', () => {
+      const drink: Drink = Object.freeze({
+        ...createDrink(),
+        quantity: 10,
+      })
+      expect(substractQuantity(drink, 3)).toEqual({
+        ...drink,
+        quantity: 7,
+      })
+    })
+
+    it('returns null if not enough quantity is left', () => {
+      const drink: Drink = Object.freeze(createDrink())
+      expect(substractQuantity(drink, 5)).toEqual(null)
     })
   })
 })

@@ -18,3 +18,21 @@ export const createDrink = (drink: Partial<Drink> = {}): Drink => {
     ...drink,
   }
 }
+
+/**
+ * Substract quantity to drink quantity
+ * @param drink 
+ * @param substractQuantity 
+ * @returns drink with updated quantity or null if not enough quantity left
+ */
+export const substractQuantity = (drink: Drink, substractQuantity: number): Drink | null => {
+  const newQuantity = drink.quantity - substractQuantity
+  if (newQuantity < 0) {
+    return null
+  }
+
+  return {
+    ...drink,
+    quantity: newQuantity,
+  }
+}
