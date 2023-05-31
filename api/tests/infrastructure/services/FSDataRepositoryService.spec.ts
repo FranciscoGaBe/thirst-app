@@ -9,9 +9,19 @@ jest.mock('../../../src/infrastructure/services/fs-drink-repository', () => {
     }
   }
 })
+const mockFsSaleRepository = Symbol('sales-repository')
+const mockCreateFsSaleRepository = jest.fn((..._: unknown[]) => mockFsSaleRepository)
+jest.mock('../../../src/infrastructure/services/fs-sale-repository', () => {
+  return {
+    createFSSaleRepositoryService: (...args: unknown[]) => {
+      return mockCreateFsSaleRepository(...args)
+    }
+  }
+})
 
 beforeEach(() => {
   mockCreateFsDrinkRepository.mockClear()
+  mockCreateFsSaleRepository.mockClear()
 })
 
 describe('FSDataRepositoryService', () => {
@@ -19,5 +29,11 @@ describe('FSDataRepositoryService', () => {
     const dataRepository = createFsDataRepositoryService()
     expect(mockCreateFsDrinkRepository).toHaveBeenCalledTimes(1)
     expect(dataRepository).toHaveProperty('drinks', mockFsDrinkRepository)
+  })
+
+  it('instantiates drink repository', () => {
+    const dataRepository = createFsDataRepositoryService()
+    expect(mockCreateFsDrinkRepository).toHaveBeenCalledTimes(1)
+    expect(dataRepository).toHaveProperty('sales', mockFsSaleRepository)
   })
 })

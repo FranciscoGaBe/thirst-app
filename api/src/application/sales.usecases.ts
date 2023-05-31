@@ -40,7 +40,7 @@ export const createSalesUseCases = (dataReposity: DataRepository): SalesUseCases
         return saleFail
       }
 
-      const sale = await dataReposity.sales.createSale({
+      const sale = await dataReposity.sales.create({
         drinkId: updatedDrink.id,
         profit: updatedDrink.price - updatedDrink.cost
       })

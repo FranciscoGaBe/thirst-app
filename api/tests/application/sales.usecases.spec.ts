@@ -2,7 +2,7 @@ import { createSalesUseCases } from '../../src/application/sales.usecases'
 import { type DataRepository } from '../../src/domain'
 import { type Drink } from '../../src/domain/drink/drink.entity'
 import { type DrinkRepository } from '../../src/domain/drink/drink.repository'
-import { type SalesRepository } from '../../src/domain/sale/sale.repository'
+import { type SaleRepository } from '../../src/domain/sale/sale.repository'
 
 describe('sales usecases', () => {
   describe('sellDrink', () => {
@@ -17,12 +17,12 @@ describe('sales usecases', () => {
     const drinkRepository: Pick<DrinkRepository, 'update'> = {
       update: async (_id, drink) => drink as Drink
     }
-    const salesRepository: Pick<SalesRepository, 'createSale'> = {
-      createSale: async (sale) => ({ id: 1, ...sale })
+    const salesRepository: Pick<SaleRepository, 'create'> = {
+      create: async (sale) => ({ id: 1, ...sale })
     }
     const dataRepository: Pick<DataRepository, 'drinks' | 'sales'> = {
       drinks: drinkRepository as DrinkRepository,
-      sales: salesRepository as SalesRepository
+      sales: salesRepository as SaleRepository
     }
     it('returns a fail if not enough money is supplied', async () => {
       const useCases = createSalesUseCases(dataRepository)
