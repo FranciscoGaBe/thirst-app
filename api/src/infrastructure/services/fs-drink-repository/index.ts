@@ -1,12 +1,17 @@
 import { type DrinkRepository } from '../../../domain/drink.repository'
-import { getAllDrinks } from './getAllDrinks'
-import { getDrinkById } from './getDrinkById'
-import { updateDrink } from './updateDrink'
+import { createFSRespositoryConfig } from '../fs-data-repository/fsRepositoryConfig'
+import { createGetAllDrinks } from './getAllDrinks'
+import { createGetDrinkById } from './getDrinkById'
+import { createUpdateDrink } from './updateDrink'
+import { type FSDrinkRepositoryConfig } from './fsDrinkRepositoryConfig'
+import { type Drink } from '../../../domain/drink.entity'
 
-export const createFSDrinkRepositoryService = (): DrinkRepository => {
+export const createFSDrinkRepositoryService = (
+  config: FSDrinkRepositoryConfig = createFSRespositoryConfig<Drink>('drinks')
+): DrinkRepository => {
   return {
-    getAll: getAllDrinks,
-    getById: getDrinkById,
-    update: updateDrink
+    getAll: createGetAllDrinks(config),
+    getById: createGetDrinkById(config),
+    update: createUpdateDrink(config)
   }
 }

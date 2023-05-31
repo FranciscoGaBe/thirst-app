@@ -1,6 +1,6 @@
 import { type DrinkRepository } from '../../../domain/drink.repository'
-import { getAllDrinks } from './getAllDrinks'
+import { type FSDrinkRepositoryConfig } from './fsDrinkRepositoryConfig'
 
-export const getDrinkById: DrinkRepository['getById'] = (id) => {
-  return getAllDrinks().find(drink => drink.id === id) ?? null
+export const createGetDrinkById = ({ readDatabase }: FSDrinkRepositoryConfig): DrinkRepository['getById'] => (id) => {
+  return readDatabase().find(drink => drink.id === id) ?? null
 }

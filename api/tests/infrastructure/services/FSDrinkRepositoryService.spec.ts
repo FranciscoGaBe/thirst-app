@@ -1,5 +1,5 @@
+import { createFSRespositoryConfig } from '../../../src/infrastructure/services/fs-data-repository/fsRepositoryConfig'
 import { createFSDrinkRepositoryService } from '../../../src/infrastructure/services/fs-drink-repository'
-import { getDrinksDatabasePath } from '../../../src/infrastructure/services/fs-drink-repository/getDrinksDatabasePath'
 
 const mockDrinks = Object.freeze([
   Object.freeze({ id: 1, name: 'test' }),
@@ -23,6 +23,10 @@ jest.mock('node:fs', () => {
     }
   }
 })
+
+const getDrinksDatabasePath = (): string => {
+  return createFSRespositoryConfig('drinks').databasePath
+}
 
 beforeEach(() => {
   mockReadFileSync.mockClear()

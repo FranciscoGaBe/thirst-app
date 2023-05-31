@@ -1,12 +1,9 @@
-import fs from 'node:fs'
-
 import { type Drink } from '../../../domain/drink.entity'
 import { type DrinkRepository } from '../../../domain/drink.repository'
-import { getAllDrinks } from './getAllDrinks'
-import { getDrinksDatabasePath } from './getDrinksDatabasePath'
+import { type FSDrinkRepositoryConfig } from './fsDrinkRepositoryConfig'
 
-export const updateDrink: DrinkRepository['update'] = (id, partialDrink) => {
-  const drinks = [...getAllDrinks()]
+export const createUpdateDrink = ({ readDatabase, writeDatabase }: FSDrinkRepositoryConfig): DrinkRepository['update'] => (id, partialDrink) => {
+  const drinks = readDatabase()
   const index = drinks.findIndex(drink => drink.id === id)
 
   if (index < 0) {
@@ -19,17 +16,11 @@ export const updateDrink: DrinkRepository['update'] = (id, partialDrink) => {
     id
   }
 
-  fs.writeFileSync(
-    getDrinksDatabasePath(),
-    JSON.stringify([
-      ...drinks.slice(0, index),
-      updatedDrink,
-      ...drinks.slice(index + 1)
-    ]),
-    {
-      encoding: 'utf-8'
-    }
-  )
+  writeDatabase([
+    ...drinks.slice(0, index),
+    updatedDrink,
+    ...drinks.slice(index + 1)
+  ])
 
   return updatedDrink
 }

@@ -1,14 +1,6 @@
-import fs from 'node:fs'
-
 import { type DrinkRepository } from '../../../domain/drink.repository'
-import { getDrinksDatabasePath } from './getDrinksDatabasePath'
+import { type FSDrinkRepositoryConfig } from './fsDrinkRepositoryConfig'
 
-export const getAllDrinks: DrinkRepository['getAll'] = () => {
-  const drinks = JSON.parse(
-    fs.readFileSync(getDrinksDatabasePath(), {
-      encoding: 'utf-8'
-    })
-  )
-
-  return drinks
+export const createGetAllDrinks = ({ readDatabase }: FSDrinkRepositoryConfig): DrinkRepository['getAll'] => () => {
+  return readDatabase()
 }
