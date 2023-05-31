@@ -4,8 +4,8 @@ import fs from 'node:fs'
 export interface FSRepositoryConfig<Record = unknown> {
   databaseRootPath: string
   databasePath: string
-  readDatabase: () => Record[]
-  writeDatabase: (data: Record[]) => void
+  readDatabase: () => Promise<Record[]>
+  writeDatabase: (data: Record[]) => Promise<boolean>
 }
 
 const databaseRootPath = path.join(__dirname, '..', '..', '..', '..', 'database')
@@ -15,14 +15,14 @@ export const createFSRespositoryConfig = <Record = unknown>(databaseName: string
   return {
     databaseRootPath,
     databasePath,
-    readDatabase: () => {
+    readDatabase: async () => {
       return JSON.parse(
         fs.readFileSync(databasePath, {
           encoding: 'utf-8'
         })
       )
     },
-    writeDatabase: (data) => {
+    writeDatabase: async (data) => {
       fs.writeFileSync(
         databasePath,
         JSON.stringify(data),
@@ -30,6 +30,8 @@ export const createFSRespositoryConfig = <Record = unknown>(databaseName: string
           encoding: 'utf-8'
         }
       )
+
+      return true
     }
   }
 }

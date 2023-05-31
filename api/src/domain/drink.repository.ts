@@ -1,7 +1,7 @@
 import { type Drink } from './drink.entity'
 
 export interface DrinkRepository {
-  getAll: () => Drink[]
-  getById: (id: Drink['id']) => Drink | null
-  update: (id: Drink['id'], drink: Partial<Drink>) => Drink | null
+  getAll: () => Promise<Drink[]>
+  getById: (id: Drink['id']) => Promise<Drink | null>
+  update: (id: Drink['id'], drink: Partial<Drink>) => Promise<Drink | null>
 }

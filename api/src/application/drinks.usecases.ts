@@ -2,13 +2,13 @@ import { type DataRepository } from '../domain'
 import { type Drink } from '../domain/drink.entity'
 
 interface DrinksUseCases {
-  getAllDrinks: () => Drink[]
+  getAllDrinks: () => Promise<Drink[]>
 }
 
 export const createDrinksUseCases = (dataReposity: DataRepository): DrinksUseCases => {
   return {
-    getAllDrinks: () => {
-      return dataReposity.drinks.getAll()
+    getAllDrinks: async () => {
+      return await dataReposity.drinks.getAll()
     }
   }
 }

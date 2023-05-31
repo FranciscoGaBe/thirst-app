@@ -35,8 +35,8 @@ beforeEach(() => {
 
 describe('FSDrinkRepositoryService', () => {
   describe('getAll', () => {
-    it('returns all drinks in the database', () => {
-      const drinks = createFSDrinkRepositoryService().getAll()
+    it('returns all drinks in the database', async () => {
+      const drinks = await createFSDrinkRepositoryService().getAll()
       expect(mockReadFileSync).toHaveBeenCalledTimes(1)
       expect(mockReadFileSync).toHaveBeenCalledWith(
         getDrinksDatabasePath(),
@@ -47,9 +47,9 @@ describe('FSDrinkRepositoryService', () => {
   })
 
   describe('getById', () => {
-    it('returns a drink by it is id from the database', () => {
+    it('returns a drink by it is id from the database', async () => {
       const mockDrink = mockDrinks[0]
-      const drink = createFSDrinkRepositoryService().getById(mockDrink.id)
+      const drink = await createFSDrinkRepositoryService().getById(mockDrink.id)
       expect(mockReadFileSync).toHaveBeenCalledTimes(1)
       expect(mockReadFileSync).toHaveBeenCalledWith(
         getDrinksDatabasePath(),
@@ -58,8 +58,8 @@ describe('FSDrinkRepositoryService', () => {
       expect(drink).toEqual(mockDrink)
     })
 
-    it('returns null if id is not found', () => {
-      const drink = createFSDrinkRepositoryService().getById(1234)
+    it('returns null if id is not found', async () => {
+      const drink = await createFSDrinkRepositoryService().getById(1234)
       expect(mockReadFileSync).toHaveBeenCalledTimes(1)
       expect(mockReadFileSync).toHaveBeenCalledWith(
         getDrinksDatabasePath(),
@@ -70,9 +70,9 @@ describe('FSDrinkRepositoryService', () => {
   })
 
   describe('update', () => {
-    it('updates drink to the database and returns it', () => {
+    it('updates drink to the database and returns it', async () => {
       const mockDrink = mockDrinks[1]
-      const drink = createFSDrinkRepositoryService().update(mockDrink.id, { quantity: 2 })
+      const drink = await createFSDrinkRepositoryService().update(mockDrink.id, { quantity: 2 })
       const expectedDrink = {
         ...mockDrink,
         quantity: 2
@@ -95,8 +95,8 @@ describe('FSDrinkRepositoryService', () => {
       expect(drink).toEqual(expectedDrink)
     })
 
-    it('returns null if id is not found and does not update database', () => {
-      const drink = createFSDrinkRepositoryService().update(1234, { quantity: 2 })
+    it('returns null if id is not found and does not update database', async () => {
+      const drink = await createFSDrinkRepositoryService().update(1234, { quantity: 2 })
       expect(mockReadFileSync).toHaveBeenCalledTimes(1)
       expect(mockReadFileSync).toHaveBeenCalledWith(
         getDrinksDatabasePath(),

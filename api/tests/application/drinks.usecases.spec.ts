@@ -5,20 +5,20 @@ import { type DrinkRepository } from '../../src/domain/drink.repository'
 
 describe('drinks usecases', () => {
   describe('getAllDrinks', () => {
-    it('returns an array of all drinks', () => {
+    it('returns an array of all drinks', async () => {
       const drinks = [createDrink()]
       const drinkRepository: DrinkRepository = {
-        getAll: () => {
+        getAll: async () => {
           return drinks
         },
-        getById: () => null,
-        update: () => null
+        getById: async () => null,
+        update: async () => null
       }
       const dataRepository: DataRepository = {
         drinks: drinkRepository
       }
       const useCases = createDrinksUseCases(dataRepository)
-      expect(useCases.getAllDrinks()).toEqual(drinks)
+      expect(await useCases.getAllDrinks()).toEqual(drinks)
     })
   })
 })
