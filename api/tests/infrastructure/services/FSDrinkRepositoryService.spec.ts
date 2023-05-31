@@ -69,6 +69,29 @@ describe('FSDrinkRepositoryService', () => {
     })
   })
 
+  describe('getByName', () => {
+    it('returns a drink by it is name from the database', async () => {
+      const mockDrink = mockDrinks[0]
+      const drink = await createFSDrinkRepositoryService().getByName(mockDrink.name)
+      expect(mockReadFileSync).toHaveBeenCalledTimes(1)
+      expect(mockReadFileSync).toHaveBeenCalledWith(
+        getDrinksDatabasePath(),
+        expect.anything()
+      )
+      expect(drink).toEqual(mockDrink)
+    })
+
+    it('returns null if name is not found', async () => {
+      const drink = await createFSDrinkRepositoryService().getByName('fake drink name')
+      expect(mockReadFileSync).toHaveBeenCalledTimes(1)
+      expect(mockReadFileSync).toHaveBeenCalledWith(
+        getDrinksDatabasePath(),
+        expect.anything()
+      )
+      expect(drink).toEqual(null)
+    })
+  })
+
   describe('update', () => {
     it('updates drink to the database and returns it', async () => {
       const mockDrink = mockDrinks[1]

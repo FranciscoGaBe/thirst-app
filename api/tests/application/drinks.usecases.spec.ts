@@ -11,6 +11,7 @@ describe('drinks usecases', () => {
         getAll: async () => {
           return drinks
         },
+        getByName: async () => null,
         getById: async () => null,
         update: async () => null
       }
