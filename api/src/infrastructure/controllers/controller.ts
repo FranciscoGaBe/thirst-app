@@ -14,7 +14,7 @@ export interface ControllerOutput {
 export type CreateController = (config: ControllerConfig) => ControllerOutput
 
 export type CreateRoute<Response, Params = unknown, Body = unknown> =
-(config: ControllerConfig) => RequestHandler<Params, Response, Body>
+(config: ControllerConfig) => RequestHandler<Params, Response, Partial<Body>>
 
 export const createControllerConfig = (): ControllerConfig => {
   const dataService = createFsDataRepositoryService()

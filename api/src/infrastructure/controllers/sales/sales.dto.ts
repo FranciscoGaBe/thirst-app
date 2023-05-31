@@ -6,6 +6,7 @@ interface FailSaleDTO {
 interface SuccessSaleDTO {
   success: true
   quantityLeft: number
+  moneyLeft: number
 }
 
 export interface CreateSaleDTO {

@@ -27,6 +27,24 @@ jest.mock('../../../src/infrastructure/services/fs-data-repository', () => {
 
 describe('Sales Controller', () => {
   describe('POST /api/v1/sales', () => {
+    it('should return 400 if drinkType is missing', async () => {
+      await request(app).post('/api/v1/sales').send({
+        moneyAmount: 5
+      }).expect(400).expect({
+        success: false,
+        error: 'Missing parameter "drinkType".'
+      })
+    })
+
+    it('should return 400 if moneyAmount is missing', async () => {
+      await request(app).post('/api/v1/sales').send({
+        drinkType: 'test'
+      }).expect(400).expect({
+        success: false,
+        error: 'Missing parameter "moneyAmount".'
+      })
+    })
+
     it('should return 404 if drinkType is not found', async () => {
       await request(app).post('/api/v1/sales').send({
         drinkType: 'fake name',
@@ -59,14 +77,15 @@ describe('Sales Controller', () => {
       })
     })
 
-    it('should return success and quantity left', async () => {
+    it('should return success, quantity left and money left', async () => {
       const res = await request(app).post('/api/v1/sales').send({
         drinkType: mockDrinks[0].name,
         moneyAmount: 2
       }).expect(200)
       expect(res.body).toEqual({
         success: true,
-        quantityLeft: mockDrinks[0].quantity - 1
+        quantityLeft: mockDrinks[0].quantity - 1,
+        moneyLeft: 2 - mockDrinks[0].price
       })
     })
   })
