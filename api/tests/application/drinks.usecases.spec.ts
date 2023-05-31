@@ -14,10 +14,10 @@ describe('drinks usecases', () => {
         getById: async () => null,
         update: async () => null
       }
-      const dataRepository: DataRepository = {
+      const dataRepository: Pick<DataRepository, 'drinks'> = {
         drinks: drinkRepository
       }
-      const useCases = createDrinksUseCases(dataRepository)
+      const useCases = createDrinksUseCases(dataRepository as DataRepository)
       expect(await useCases.getAllDrinks()).toEqual(drinks)
     })
   })
