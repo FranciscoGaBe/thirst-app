@@ -1,5 +1,5 @@
-import { type Drink } from '../../../domain/drink.entity'
-import { type DrinkRepository } from '../../../domain/drink.repository'
+import { type Drink } from '../../../domain/drink/drink.entity'
+import { type DrinkRepository } from '../../../domain/drink/drink.repository'
 import { type FSDrinkRepositoryConfig } from './fsDrinkRepositoryConfig'
 
 export const createUpdateDrink = ({ readDatabase, writeDatabase }: FSDrinkRepositoryConfig): DrinkRepository['update'] => async (id, partialDrink) => {

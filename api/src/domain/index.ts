@@ -1,4 +1,4 @@
-import { type DrinkRepository } from './drink.repository'
+import { type DrinkRepository } from './drink/drink.repository'
 
 export interface DataRepository {
   drinks: DrinkRepository

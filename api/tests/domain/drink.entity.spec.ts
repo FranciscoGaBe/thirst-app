@@ -1,4 +1,4 @@
-import { type Drink, createDrink, substractQuantity } from '../../src/domain/drink.entity'
+import { type Drink, createDrink, substractQuantity } from '../../src/domain/drink/drink.entity'
 
 describe('drink entity', () => {
   describe('createDrink', () => {

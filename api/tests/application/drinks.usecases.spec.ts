@@ -1,7 +1,7 @@
 import { createDrinksUseCases } from '../../src/application/drinks.usecases'
 import { type DataRepository } from '../../src/domain'
-import { createDrink } from '../../src/domain/drink.entity'
-import { type DrinkRepository } from '../../src/domain/drink.repository'
+import { createDrink } from '../../src/domain/drink/drink.entity'
+import { type DrinkRepository } from '../../src/domain/drink/drink.repository'
 
 describe('drinks usecases', () => {
   describe('getAllDrinks', () => {

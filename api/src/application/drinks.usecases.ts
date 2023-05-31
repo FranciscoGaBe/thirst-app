@@ -1,5 +1,5 @@
 import { type DataRepository } from '../domain'
-import { type Drink } from '../domain/drink.entity'
+import { type Drink } from '../domain/drink/drink.entity'
 
 export interface DrinksUseCases {
   getAllDrinks: () => Promise<Drink[]>
