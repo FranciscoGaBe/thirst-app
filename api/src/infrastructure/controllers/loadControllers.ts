@@ -1,9 +1,11 @@
 import { type Application } from 'express'
 import { createControllerConfig, type CreateController } from './controller'
 import { createDrinksController } from './drinks/drinks.controller'
+import { createSalesController } from './sales/sales.controller'
 
 const controllersCreators: CreateController[] = [
-  createDrinksController
+  createDrinksController,
+  createSalesController
 ]
 
 export const loadControllers = (app: Application): void => {
