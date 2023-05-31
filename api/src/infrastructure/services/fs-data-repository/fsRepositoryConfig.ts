@@ -9,8 +9,8 @@ export interface FSRepositoryConfig<Record = unknown> {
 }
 
 const databaseRootPath = path.join(__dirname, '..', '..', '..', '..', 'database')
-export const createFSRespositoryConfig = <Record = unknown>(databaseName: string): FSRepositoryConfig<Record> => {
-  const databasePath = path.join(databaseRootPath, databaseName)
+export const createFSRepositoryConfig = <Record = unknown>(databaseName: string): FSRepositoryConfig<Record> => {
+  const databasePath = path.join(databaseRootPath, `${databaseName}.json`)
 
   return {
     databaseRootPath,

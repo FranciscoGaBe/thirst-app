@@ -13,7 +13,7 @@ This folder will contain our 2 main entities: __drink__ and __sale__
 
 ##### Drink
 Contains the following properties: __name__, __price__, __cost__  and __quantity__. Exposes a __removeQuantity__ method.
-The DrinksReposity contains a __getAll__ and __update__ methods.
+The DrinksReposity contains a __getAll__, __getById__, and __update__ methods.
 
 ##### Sale
 Contains the following properties: __drinkId__, __quantity__ and __profit__.

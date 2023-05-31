@@ -1,7 +1,7 @@
 import { type DataRepository } from '../domain'
 import { type Drink } from '../domain/drink.entity'
 
-interface DrinksUseCases {
+export interface DrinksUseCases {
   getAllDrinks: () => Promise<Drink[]>
 }
 
