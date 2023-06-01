@@ -1,3 +1,9 @@
+import { DrinksDisplayer } from '../drinks-displayer'
+
 export const VendingMachine = (): JSX.Element => {
-  return <main></main>
+  return (
+    <main>
+      <DrinksDisplayer />
+    </main>
+  )
 }
