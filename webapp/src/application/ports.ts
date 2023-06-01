@@ -6,3 +6,7 @@ export interface DrinkStorageService {
 }
 
 export type StorageService = DrinkStorageService
+
+export interface DrinkRepositoryService {
+  getAllDrinks: () => Promise<Drink[]>
+}

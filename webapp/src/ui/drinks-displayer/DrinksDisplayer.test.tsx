@@ -1,34 +1,51 @@
 import { render, screen } from '@testing-library/react'
 import { DrinksDisplayer } from './DrinksDisplayer'
-import { type StoreInitialState, StoreProvider } from '../../services/store'
+import { StoreProvider } from '../../services/store'
 
-const mockDrink = jest.fn((_: unknown) => <div />)
+const mockDrinks = [
+  { drinkType: 'test1', price: 1, image: 'test1' },
+  { drinkType: 'test2', price: 2, image: 'test2' },
+  { drinkType: 'test3', price: 3, image: 'test3' }
+]
+
+const mockFetchDrinks = jest.fn()
+jest.mock('../../application/getDrinks', () => {
+  return {
+    useGetDrinks: () => {
+      return {
+        drinks: mockDrinks,
+        fetchDrinks: async () => {
+          mockFetchDrinks()
+        }
+      }
+    }
+  }
+})
+const mockDrinkComponent = jest.fn((_: unknown) => <div />)
 jest.mock('../drink', () => {
   return {
     Drink: (props: unknown) => {
-      return mockDrink(props)
+      return mockDrinkComponent(props)
     }
   }
 })
 
-const initialState: StoreInitialState = {
-  drinks: [
-    { drinkType: 'test1', price: 1, image: 'test1' },
-    { drinkType: 'test2', price: 2, image: 'test2' },
-    { drinkType: 'test3', price: 3, image: 'test3' }
-  ]
-}
-
 const renderDrinksDisplayer = (): void => {
   render(
-    <StoreProvider initialState={ initialState }>
+    <StoreProvider>
       <DrinksDisplayer />
     </StoreProvider>
   )
 }
 
 beforeEach(() => {
-  mockDrink.mockClear()
+  jest.useFakeTimers()
+  mockDrinkComponent.mockClear()
+  mockFetchDrinks.mockClear()
+})
+afterEach(() => {
+  jest.clearAllTimers()
+  jest.useRealTimers()
 })
 describe('DrinksDisplayer', () => {
   it('renders a presentation element', () => {
@@ -36,10 +53,18 @@ describe('DrinksDisplayer', () => {
     expect(screen.getByRole('presentation')).toBeInTheDocument()
   })
 
-  it('renders drinks in store', () => {
+  it('renders drinks in store', async () => {
     renderDrinksDisplayer()
-    expect(mockDrink).toHaveBeenNthCalledWith(1, { name: 'test1', price: 1, image: 'test1' })
-    expect(mockDrink).toHaveBeenNthCalledWith(2, { name: 'test2', price: 2, image: 'test2' })
-    expect(mockDrink).toHaveBeenNthCalledWith(3, { name: 'test3', price: 3, image: 'test3' })
+    expect(mockFetchDrinks).toHaveBeenCalledTimes(1)
+    jest.runAllTimers()
+    expect(mockDrinkComponent).toHaveBeenNthCalledWith(
+      1, { name: 'test1', price: 1, image: 'test1' }
+    )
+    expect(mockDrinkComponent).toHaveBeenNthCalledWith(
+      2, { name: 'test2', price: 2, image: 'test2' }
+    )
+    expect(mockDrinkComponent).toHaveBeenNthCalledWith(
+      3, { name: 'test3', price: 3, image: 'test3' }
+    )
   })
 })

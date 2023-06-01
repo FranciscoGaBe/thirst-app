@@ -1,8 +1,13 @@
-import { useDrinkStorage } from '../../services/storageAdapter'
+import { useEffect } from 'react'
+import { useGetDrinks } from '../../application/getDrinks'
 import { Drink } from '../drink'
 
 export const DrinksDisplayer = (): JSX.Element => {
-  const { drinks } = useDrinkStorage()
+  const { drinks, fetchDrinks } = useGetDrinks()
+
+  useEffect(() => {
+    void fetchDrinks()
+  }, [])
 
   return (
     <div role="presentation">
