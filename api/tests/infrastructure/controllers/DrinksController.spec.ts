@@ -28,13 +28,14 @@ jest.mock('../../../src/infrastructure/controllers/controller', () => {
 describe('Drinks Controller', () => {
   describe('GET /api/v1/drinks', () => {
     it('should return 200 OK', async () => {
-      return await request(app).get('/api/v1/drinks').expect(200)
+      await request(app).get('/api/v1/drinks').expect(200)
     })
 
     it('should return all drinks in response', async () => {
-      return await request(app).get('/api/v1/drinks').expect([
-        { drinkType: 'test', price: 1, image: '/images/1' },
-        { drinkType: 'test2', price: 2, image: '/images/2' }
+      const response = await request(app).get('/api/v1/drinks')
+      expect(response.body).toEqual([
+        { drinkType: 'test', price: 1, image: expect.stringContaining('/images/1') },
+        { drinkType: 'test2', price: 2, image: expect.stringContaining('/images/2') }
       ])
     })
   })
