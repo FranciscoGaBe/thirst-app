@@ -1,7 +1,9 @@
-function App (): JSX.Element {
+import { VendingMachine } from './ui/vending-machine'
+
+const App = (): JSX.Element => {
   return (
     <div>
-      App
+      <VendingMachine />
     </div>
   )
 }
