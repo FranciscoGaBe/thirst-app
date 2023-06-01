@@ -7,7 +7,6 @@ interface Props {
 export const Drink = ({ name, price, image }: Props): JSX.Element => {
   return (
     <div>
-      <h3>{ name }</h3>
       <img src={ image } alt={ name } />
       <div>{ price } moneys</div>
     </div>

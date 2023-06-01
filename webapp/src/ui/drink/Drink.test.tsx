@@ -6,11 +6,6 @@ const renderDrink = (): void => {
 }
 
 describe('Drink', () => {
-  it('renders name prop', () => {
-    renderDrink()
-    expect(screen.getByText('Test drink')).toBeInTheDocument()
-  })
-
   it('renders price prop alongside "moneys"', () => {
     renderDrink()
     expect(screen.getByText('2 moneys')).toBeInTheDocument()
