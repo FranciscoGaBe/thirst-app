@@ -16,7 +16,7 @@ module.exports = {
     'react'
   ],
   rules: {
-    'max-len': ['warn', 80],
+    'max-len': ['warn', 100],
     'react/react-in-jsx-scope': 'off',
     'react/jsx-closing-tag-location': 'warn',
     'react/jsx-closing-bracket-location': 'warn',
@@ -24,6 +24,8 @@ module.exports = {
     'react/jsx-curly-newline': 'warn',
     'react/jsx-indent': ['warn', 2],
     'react/jsx-space-before-closing': 'warn',
-    'react/jsx-wrap-multilines': 'error'
+    'react/jsx-wrap-multilines': 'error',
+    'react/jsx-indent-props': 'warn',
+    'react/jsx-max-props-per-line': ['warn', { when: 'multiline' }]
   }
 }
