@@ -1,8 +1,9 @@
+import styles from './App.module.css'
 import { VendingMachine } from './ui/vending-machine'
 
 const App = (): JSX.Element => {
   return (
-    <div>
+    <div className={ styles.app }>
       <VendingMachine />
     </div>
   )

@@ -1,0 +1,45 @@
+.drink {
+  text-align: center;
+  padding-top: 2rem;
+  flex-grow: 1;
+}
+
+.drink-image {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  padding: 0 .2rem;
+  bottom: -1.2rem;
+}
+
+.drink-image img {
+  position: absolute;
+  top: 0;
+  height: 200px;
+}
+
+.drink-price {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient( to bottom,#eee, #bcc6cc);
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: .2rem .5rem;
+}
+
+.drink-code {
+  background-image: linear-gradient( to bottom, #bcc6cc, #eee, #bcc6cc);
+  padding: .4rem 0;
+}
+
+.drink-code span {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2rem .6rem;
+  font-family: monospace;
+  font-size: 1rem;
+}

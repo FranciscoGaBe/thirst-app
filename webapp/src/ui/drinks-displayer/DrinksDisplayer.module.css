@@ -1,0 +1,11 @@
+.drinks-displayer {
+  display: flex;
+  flex-wrap: wrap;
+  background-image: url('/src/assets/img/ice.jpg');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+}

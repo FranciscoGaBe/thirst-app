@@ -1,4 +1,6 @@
 import { useEffect } from 'react'
+
+import styles from './DrinksDisplayer.module.css'
 import { useGetDrinks } from '../../application/getDrinks'
 import { Drink } from '../drink'
 
@@ -10,14 +12,15 @@ export const DrinksDisplayer = (): JSX.Element => {
   }, [])
 
   return (
-    <div role="presentation">
+    <div role="presentation" className={ styles['drinks-displayer'] }>
       {
-        drinks.map(({ drinkType, image, price }) => (
+        drinks.map(({ drinkType, image, price }, index) => (
           <Drink
               key={ drinkType }
               name={ drinkType }
               price={ price }
               image={ image }
+              code={ `A${index.toString().padStart(2, '0')}` }
           />
         ))
       }
