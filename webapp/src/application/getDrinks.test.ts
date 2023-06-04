@@ -1,4 +1,4 @@
-import { renderHook, waitFor } from '@testing-library/react'
+import { renderHook } from '@testing-library/react'
 import { type Drink } from '../domain/drink'
 import { getDrinks, useGetDrinks } from './getDrinks'
 import { type DrinkStorageService, type DrinkRepositoryService } from './ports'
@@ -31,8 +31,8 @@ describe('getDrinks', () => {
         setDrinks: setDrinksSpy
       }
     })
-    void fetchDrinks()
-    await waitFor(() => { expect(setDrinksSpy).toHaveBeenCalledWith(testDrinks) })
+    await fetchDrinks()
+    expect(setDrinksSpy).toHaveBeenCalledWith(testDrinks)
   })
 })
 
