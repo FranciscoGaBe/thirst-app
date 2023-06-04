@@ -3,22 +3,32 @@ import { useDrinkRepository } from '../services/drinkService'
 import { useDrinkStorage } from '../services/storageAdapter'
 import { type DrinkRepositoryService, type DrinkStorageService } from './ports'
 
-interface GetDrinks {
+interface GetDrinksConfig {
+  drinkStorage: DrinkStorageService
+  drinkRepository: DrinkRepositoryService
+}
+
+interface GetDrinksReturn {
   drinks: Drink[]
   fetchDrinks: () => Promise<void>
 }
 
-export const useGetDrinks = (): GetDrinks => {
-  const storage: DrinkStorageService = useDrinkStorage()
-  const { drinks, setDrinks } = storage
-  const drinkRepository: DrinkRepositoryService = useDrinkRepository()
+export type GetDrinks = (config: GetDrinksConfig) => GetDrinksReturn
 
-  const fetchDrinks: GetDrinks['fetchDrinks'] = async () => {
-    setDrinks(await drinkRepository.getAllDrinks())
-  }
+export const getDrinks: GetDrinks = ({ drinkRepository, drinkStorage }) => {
+  const { drinks, setDrinks } = drinkStorage
 
   return {
     drinks,
-    fetchDrinks
+    fetchDrinks: async () => {
+      setDrinks(await drinkRepository.getAllDrinks())
+    }
   }
+}
+
+export const useGetDrinks = (): GetDrinksReturn => {
+  const drinkStorage: DrinkStorageService = useDrinkStorage()
+  const drinkRepository: DrinkRepositoryService = useDrinkRepository()
+
+  return getDrinks({ drinkRepository, drinkStorage })
 }
