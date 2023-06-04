@@ -17,3 +17,18 @@ export type StorageService = DrinkStorageService & MoneyStorageService
 export interface DrinkRepositoryService {
   getAllDrinks: () => Promise<Drink[]>
 }
+
+export interface SaleSuccess {
+  success: true
+  quantityLeft: number
+  moneyLeft: number
+}
+
+export interface SaleFail {
+  success: false
+  error: string
+}
+
+export interface SaleRepositoryService {
+  createSale: (drinkType: string, moneyAmount: number) => Promise<SaleSuccess | SaleFail>
+}
