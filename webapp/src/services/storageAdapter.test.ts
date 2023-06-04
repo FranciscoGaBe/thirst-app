@@ -44,7 +44,7 @@ describe('storageAdapter', () => {
     it('returns setDrinks function to set drinks', () => {
       const { result, rerender } = renderHook(() => useDrinkStorage(), { wrapper: StoreProvider })
 
-      const test: Drink[] = [{ drinkType: 'test', image: 'test', price: 1 }]
+      const test: Drink[] = [{ code: 'test', drinkType: 'test', image: 'test', price: 1 }]
       act(() => {
         result.current.setDrinks(test)
       })

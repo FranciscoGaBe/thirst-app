@@ -13,8 +13,8 @@ afterEach(() => {
 })
 describe('buyDrink', () => {
   const testDrinks: Drink[] = [
-    { drinkType: 'test', image: '', price: 1 },
-    { drinkType: 'empty', image: '', price: 2 }
+    { code: 'test', drinkType: 'test', image: '', price: 1 },
+    { code: 'empty', drinkType: 'empty', image: '', price: 2 }
   ]
 
   const drinkStorage: DrinkStorageService = {
