@@ -1,7 +1,8 @@
 import { renderHook } from '@testing-library/react'
-import { useMoneyStorage } from './storageAdapter'
+import { useDrinkStorage, useMoneyStorage } from './storageAdapter'
 import { StoreProvider } from './store'
 import { act } from 'react-dom/test-utils'
+import { type Drink } from '../domain/drink'
 
 describe('storageAdapter', () => {
   describe('useMoneyStorage', () => {
@@ -32,6 +33,23 @@ describe('storageAdapter', () => {
       })
       rerender()
       expect(result.current.money).toEqual({ amount: 12, type: 'moneys' })
+    })
+  })
+  describe('useDrinkStorage', () => {
+    it('returns empty array of drinks by default', () => {
+      const { result } = renderHook(() => useDrinkStorage(), { wrapper: StoreProvider })
+
+      expect(result.current.drinks).toEqual([])
+    })
+    it('returns setDrinks function to set drinks', () => {
+      const { result, rerender } = renderHook(() => useDrinkStorage(), { wrapper: StoreProvider })
+
+      const test: Drink[] = [{ drinkType: 'test', image: 'test', price: 1 }]
+      act(() => {
+        result.current.setDrinks(test)
+      })
+      rerender()
+      expect(result.current.drinks).toEqual(test)
     })
   })
 })
