@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react'
-import { useDrinkStorage, useMoneyStorage } from './storageAdapter'
+import { useDrinkStorage, useErrorStorage, useMoneyStorage } from './storageAdapter'
 import { StoreProvider } from './store'
 import { act } from 'react-dom/test-utils'
 import { type Drink } from '../domain/drink'
@@ -50,6 +50,51 @@ describe('storageAdapter', () => {
       })
       rerender()
       expect(result.current.drinks).toEqual(test)
+    })
+  })
+  describe('useErrorStorage', () => {
+    describe('getError', () => {
+      it('returns empty string if error is not defined', () => {
+        const { result } = renderHook(() => useErrorStorage(), { wrapper: StoreProvider })
+
+        expect(result.current.getError('test')).toEqual('')
+      })
+
+      it('returns error message', () => {
+        const { result } = renderHook(() => useErrorStorage(), { wrapper: StoreProvider })
+
+        act(() => {
+          result.current.setError('test', 'error message')
+        })
+        expect(result.current.getError('test')).toEqual('error message')
+      })
+    })
+
+    describe('setError', () => {
+      it('returns setError function to set error', () => {
+        const { result, rerender } = renderHook(() => useErrorStorage(), { wrapper: StoreProvider })
+
+        act(() => {
+          result.current.setError('testType', 'error message')
+        })
+        rerender()
+        expect(result.current.getError('testType')).toEqual('error message')
+      })
+    })
+
+    describe('clearError', () => {
+      it('clears error if it is defined', () => {
+        const { result } = renderHook(() => useErrorStorage(), { wrapper: StoreProvider })
+
+        act(() => {
+          result.current.setError('test', 'error message')
+        })
+        expect(result.current.getError('test')).toEqual('error message')
+        act(() => {
+          result.current.clearError('test')
+        })
+        expect(result.current.getError('test')).toEqual('')
+      })
     })
   })
 })

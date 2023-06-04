@@ -1,3 +1,4 @@
+import { type ErrorType, type ErrorMessage } from '../domain/appError'
 import { type Drink } from '../domain/drink'
 import { type Money } from '../domain/money'
 
@@ -12,7 +13,13 @@ export interface MoneyStorageService {
   setMoneyAmount: (amount: number) => void
 }
 
-export type StorageService = DrinkStorageService & MoneyStorageService
+export interface ErrorStorageService {
+  getError: (type: ErrorType) => ErrorMessage
+  setError: (type: ErrorType, message: ErrorMessage) => void
+  clearError: (type: ErrorType) => void
+}
+
+export type StorageService = DrinkStorageService & MoneyStorageService & ErrorStorageService
 
 export interface DrinkRepositoryService {
   getAllDrinks: () => Promise<Drink[]>
