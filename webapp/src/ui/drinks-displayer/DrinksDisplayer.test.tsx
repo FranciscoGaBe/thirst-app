@@ -58,13 +58,13 @@ describe('DrinksDisplayer', () => {
     expect(mockFetchDrinks).toHaveBeenCalledTimes(1)
     jest.runAllTimers()
     expect(mockDrinkComponent).toHaveBeenNthCalledWith(
-      1, { name: 'test1', price: 1, image: 'test1' }
+      1, { code: 'A00', name: 'test1', price: 1, image: 'test1' }
     )
     expect(mockDrinkComponent).toHaveBeenNthCalledWith(
-      2, { name: 'test2', price: 2, image: 'test2' }
+      2, { code: 'A01', name: 'test2', price: 2, image: 'test2' }
     )
     expect(mockDrinkComponent).toHaveBeenNthCalledWith(
-      3, { name: 'test3', price: 3, image: 'test3' }
+      3, { code: 'A02', name: 'test3', price: 3, image: 'test3' }
     )
   })
 })
