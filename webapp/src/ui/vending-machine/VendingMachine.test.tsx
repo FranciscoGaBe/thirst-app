@@ -9,6 +9,14 @@ jest.mock('../drinks-displayer', () => {
   }
 })
 
+jest.mock('../coin-drawer', () => {
+  return {
+    CoinDrawer: () => {
+      return <div role="presentation" aria-label="Coin Drawer" />
+    }
+  }
+})
+
 const renderVendingMachine = (): void => {
   render(<VendingMachine />)
 }
@@ -23,6 +31,13 @@ describe('VendingMachine', () => {
     renderVendingMachine()
     expect(
       screen.getByRole('presentation', { name: 'Drinks Displayer' })
+    ).toBeInTheDocument()
+  })
+
+  it('renders CoinDrawer component', () => {
+    renderVendingMachine()
+    expect(
+      screen.getByRole('presentation', { name: 'Coin Drawer' })
     ).toBeInTheDocument()
   })
 })
