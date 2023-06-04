@@ -6,7 +6,7 @@ interface FetchApiOptions {
 }
 
 // TODO: turn into env variable.
-const baseUrl = `${location.protocol}//${location.hostname}:8000`
+export const baseUrl = `${location.protocol}//${location.hostname}:8000`
 const getUrlWithParams = (url: string, params: object): string => {
   const urlWithParams = new URL(url, baseUrl)
 
