@@ -14,13 +14,13 @@ export const DrinksDisplayer = (): JSX.Element => {
   return (
     <div role="presentation" className={ styles['drinks-displayer'] }>
       {
-        drinks.map(({ drinkType, image, price }, index) => (
+        drinks.map(({ drinkType, image, price, code }) => (
           <Drink
               key={ drinkType }
               name={ drinkType }
               price={ price }
               image={ image }
-              code={ `A${index.toString().padStart(2, '0')}` }
+              code={ code }
           />
         ))
       }

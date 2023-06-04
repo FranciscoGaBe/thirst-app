@@ -21,8 +21,14 @@ export interface ErrorStorageService {
 
 export type StorageService = DrinkStorageService & MoneyStorageService & ErrorStorageService
 
+interface DrinkDTO {
+  drinkType: string
+  price: number
+  image: string
+}
+
 export interface DrinkRepositoryService {
-  getAllDrinks: () => Promise<Drink[]>
+  getAllDrinks: () => Promise<DrinkDTO[]>
 }
 
 export interface SaleSuccess {

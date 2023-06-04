@@ -3,9 +3,9 @@ import { DrinksDisplayer } from './DrinksDisplayer'
 import { StoreProvider } from '../../services/store'
 
 const mockDrinks = [
-  { drinkType: 'test1', price: 1, image: 'test1' },
-  { drinkType: 'test2', price: 2, image: 'test2' },
-  { drinkType: 'test3', price: 3, image: 'test3' }
+  { code: 'A00', drinkType: 'test1', price: 1, image: 'test1' },
+  { code: 'A01', drinkType: 'test2', price: 2, image: 'test2' },
+  { code: 'A02', drinkType: 'test3', price: 3, image: 'test3' }
 ]
 
 const mockFetchDrinks = jest.fn()

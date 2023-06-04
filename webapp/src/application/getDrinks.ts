@@ -21,7 +21,15 @@ export const getDrinks: GetDrinks = ({ drinkRepository, drinkStorage }) => {
   return {
     drinks,
     fetchDrinks: async () => {
-      setDrinks(await drinkRepository.getAllDrinks())
+      const drinks = await drinkRepository.getAllDrinks()
+      setDrinks(
+        drinks.map((drink, index) => {
+          return {
+            ...drink,
+            code: `A${index.toString().padStart(2, '0')}`
+          }
+        })
+      )
     }
   }
 }
