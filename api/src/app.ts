@@ -1,17 +1,19 @@
 #!/usr/bin/env node
-import { loadEndpoints } from "./controllers/api";
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors'
+import path from 'node:path'
 
-const express = require('express')
-const bodyParser = require('body-parser');
-const cors = require('cors')
+import { loadControllers } from './infrastructure/controllers/loadControllers'
 
-const app = express();
-const port = process.env.PORT || 8000;
+const app = express()
+const port = process.env.PORT ?? 8000
 
-app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '..', 'storage')))
+app.use(bodyParser.json())
 app.use(cors())
 app.set('port', port)
 
-loadEndpoints(app)
+loadControllers(app)
 
-export default app;
+export default app

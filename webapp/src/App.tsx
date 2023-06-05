@@ -1,17 +1,12 @@
-import { BrowserRouter as Router } from "react-router-dom";
-import { Header } from "./ui/Header";
-import { Home } from "./ui/Home";
-import styles from './App.module.css';
+import styles from './App.module.css'
+import { VendingMachine } from './ui/vending-machine'
 
-function App() {
-    return (
-        <Router>
-            <div className={styles.App}>
-                <Header />
-                <Home />
-            </div>
-        </Router>
-    )
+const App = (): JSX.Element => {
+  return (
+    <div className={ styles.app }>
+      <VendingMachine />
+    </div>
+  )
 }
 
-export default App;
+export default App

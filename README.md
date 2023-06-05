@@ -3,6 +3,10 @@
 Thirst App is an awesome application that from a few input parameters (drink type and amount of money) is capable to
 order a drink, to quench your thirst, and show a cool message for the desired drink.
 
+## Running the App
+
+Follow [INSTRUCTIONS.md](INSTRUCTIONS.md) to run the application, run `make migrate` to populate the database.
+
 ## How it works?
 
 This app is based in two components:
