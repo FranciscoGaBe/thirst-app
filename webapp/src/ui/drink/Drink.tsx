@@ -9,7 +9,7 @@ interface Props {
 
 export const Drink = ({ name, price, image, code }: Props): JSX.Element => {
   return (
-    <div className={ styles.drink }>
+    <div className={ styles.drink } title={ name }>
       <div className={ styles['drink-image'] }>
         <img src={ image } alt={ name } />
       </div>

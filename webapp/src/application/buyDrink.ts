@@ -47,6 +47,7 @@ export const buyDrink: BuyDrink = ({
         ])
       }
       setMoneyAmount(response.moneyLeft)
+      setError('buy', 'Thank you for your purchase!')
     }
   }
 }

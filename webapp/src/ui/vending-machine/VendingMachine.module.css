@@ -2,9 +2,12 @@
   height: 100%;
   background-color: #393646;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .bottom {
+  flex-shrink: 0;
   padding: 2rem;
   display: flex;
   justify-content: space-between;
