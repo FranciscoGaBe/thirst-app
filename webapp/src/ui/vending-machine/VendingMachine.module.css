@@ -1,5 +1,12 @@
 .vending-machine {
   height: 100%;
-  background-color: #1B1B1B;
+  background-color: #393646;
   padding: 1rem;
+}
+
+.bottom {
+  display: flex;
+  padding: 2rem;
+  justify-content: space-between;
+  align-items: center;
 }

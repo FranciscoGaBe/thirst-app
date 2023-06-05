@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useGetDrinkByCode } from '../../application/getDrinkByCode'
 import { useBuyDrink } from '../../application/buyDrink'
+import styles from './SelectionPanel.module.css'
 
 const keys: string[] = [
-  'C', '0', 'A', ...Array(9).fill(0).map((_, index) => (index + 1).toString())
+  ...Array(9).fill(0).map((_, index) => (9 - index).toString()), 'C', '0', 'A'
 ]
 
 export const SelectionPanel = (): JSX.Element => {
@@ -52,18 +53,19 @@ export const SelectionPanel = (): JSX.Element => {
   }
 
   return (
-    <div role="presentation">
-      <div>{ code }</div>
-      <div>
+    <div role="presentation" className={ styles.panel }>
+      <div className={ styles['code-panel'] }>{ code }</div>
+      <div className={ styles.keyboard }>
         {
           keys.map(key => (
-            <button
-                key={ key }
-                aria-label={ key === 'C' ? 'Clear' : key }
-                onClick={ () => { handleClick(key) } }
-            >
-              { key }
-            </button>
+            <div key={ key }>
+              <button
+                  aria-label={ key === 'C' ? 'Clear' : key }
+                  onClick={ () => { handleClick(key) } }
+              >
+                { key }
+              </button>
+            </div>
           ))
         }
       </div>

@@ -7,8 +7,10 @@ export const VendingMachine = (): JSX.Element => {
   return (
     <main className={ styles['vending-machine'] }>
       <DrinksDisplayer />
-      <SelectionPanel />
-      <CoinDrawer />
+      <div className={ styles.bottom }>
+        <SelectionPanel />
+        <CoinDrawer />
+      </div>
     </main>
   )
 }
