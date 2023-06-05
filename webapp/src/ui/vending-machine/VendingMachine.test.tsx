@@ -17,6 +17,14 @@ jest.mock('../coin-drawer', () => {
   }
 })
 
+jest.mock('../selection-panel', () => {
+  return {
+    SelectionPanel: () => {
+      return <div role="presentation" aria-label="Selection Panel" />
+    }
+  }
+})
+
 const renderVendingMachine = (): void => {
   render(<VendingMachine />)
 }
@@ -38,6 +46,13 @@ describe('VendingMachine', () => {
     renderVendingMachine()
     expect(
       screen.getByRole('presentation', { name: 'Coin Drawer' })
+    ).toBeInTheDocument()
+  })
+
+  it('renders SelectionPanel component', () => {
+    renderVendingMachine()
+    expect(
+      screen.getByRole('presentation', { name: 'Selection Panel' })
     ).toBeInTheDocument()
   })
 })

@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react'
 import { DrinksDisplayer } from './DrinksDisplayer'
-import { StoreProvider } from '../../services/store'
 
 const mockDrinks = [
   { code: 'A00', drinkType: 'test1', price: 1, image: 'test1' },
@@ -32,9 +31,7 @@ jest.mock('../drink', () => {
 
 const renderDrinksDisplayer = (): void => {
   render(
-    <StoreProvider>
-      <DrinksDisplayer />
-    </StoreProvider>
+    <DrinksDisplayer />
   )
 }
 

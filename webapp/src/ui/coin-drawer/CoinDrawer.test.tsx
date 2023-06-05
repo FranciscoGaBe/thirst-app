@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { StoreProvider } from '../../services/store'
 import { CoinDrawer } from './CoinDrawer'
 
 const mockIncrease = jest.fn()
@@ -17,16 +16,14 @@ jest.mock('../../application/increaseMoney', () => {
 
 const renderCoinDrawer = (): void => {
   render(
-    <StoreProvider>
-      <CoinDrawer />
-    </StoreProvider>
+    <CoinDrawer />
   )
 }
 
 beforeEach(() => {
   mockIncrease.mockClear()
 })
-describe('DrinksDisplayer', () => {
+describe('CoinDrawer', () => {
   it('renders a presentation element', () => {
     renderCoinDrawer()
     expect(screen.getByRole('presentation')).toBeInTheDocument()

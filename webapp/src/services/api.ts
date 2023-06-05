@@ -24,7 +24,10 @@ export const fetchApi = async <ResponseData = unknown>(
     getUrlWithParams(url, params),
     {
       method,
-      body: (data === undefined) ? undefined : JSON.stringify(data)
+      body: (data === undefined) ? undefined : JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
   )
 

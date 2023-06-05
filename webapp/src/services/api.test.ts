@@ -19,7 +19,10 @@ describe('fetchApi', () => {
     expect(data).toBe('Test result')
     expect(fetchSpy).toHaveBeenCalledWith(`${baseUrl}/testurl?params=params`, {
       body: JSON.stringify({ data: 'data' }),
-      method: 'POST'
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
   })
 })
