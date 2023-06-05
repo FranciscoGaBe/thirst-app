@@ -64,6 +64,12 @@ const inputCode = (code: string): void => {
 beforeEach(() => {
   mockBuy.mockClear()
   mockGetDrinkByCode.mockClear()
+  jest.useFakeTimers()
+})
+
+afterEach(() => {
+  jest.runAllTimers()
+  jest.useRealTimers()
 })
 describe('SelectionDrawer', () => {
   it('renders a presentation element', () => {
@@ -124,5 +130,21 @@ describe('SelectionDrawer', () => {
     inputCode('A99')
     expect(mockBuy).not.toHaveBeenCalled()
     expect(screen.queryByText('A99')).toBeFalsy()
+  })
+
+  it('pressing "C" clears the code', () => {
+    renderSelectionPanel()
+    inputCode('A1')
+    expect(screen.getByText('A1')).toBeInTheDocument()
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Clear' })
+    )
+    expect(screen.queryByText('A12')).toBeFalsy()
+  })
+
+  it('does not accept more than one "A" key', () => {
+    renderSelectionPanel()
+    inputCode('AA')
+    expect(screen.queryByText('AA')).toBeFalsy()
   })
 })
