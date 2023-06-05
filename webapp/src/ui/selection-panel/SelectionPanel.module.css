@@ -8,18 +8,6 @@
   border-radius: .5rem;
 }
 
-.code-panel {
-  background-color: #F4EEE0;
-  height: 2rem;
-  border-radius: .15rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: monospace;
-  font-weight: bolder;
-  font-size: 1.75rem;
-}
-
 .keyboard {
   display: flex;
   flex-wrap: wrap;

@@ -1,6 +1,17 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { SelectionPanel } from './SelectionPanel'
 
+const mockScreen = jest.fn((_props: unknown) => (
+  <div role="presentation" aria-label="Screen"></div>
+))
+jest.mock('../screen', () => {
+  return {
+    Screen: (props: unknown) => {
+      return mockScreen(props)
+    }
+  }
+})
+
 const mockBuy = jest.fn()
 jest.mock('../../application/buyDrink', () => {
   return {
@@ -47,6 +58,22 @@ jest.mock('../../application/getDrinkByCode', () => {
   }
 })
 
+const mockUseHandleError = jest.fn()
+const mockClearError = jest.fn()
+jest.mock('../../application/handleError', () => {
+  return {
+    useHandleError: (type: unknown) => {
+      mockUseHandleError(type)
+      return {
+        message: 'error message',
+        clear: () => {
+          mockClearError()
+        }
+      }
+    }
+  }
+})
+
 const renderSelectionPanel = (): void => {
   render(
     <SelectionPanel />
@@ -62,8 +89,11 @@ const inputCode = (code: string): void => {
 }
 
 beforeEach(() => {
+  mockScreen.mockClear()
   mockBuy.mockClear()
   mockGetDrinkByCode.mockClear()
+  mockUseHandleError.mockClear()
+  mockClearError.mockClear()
   jest.useFakeTimers()
 })
 
@@ -103,19 +133,19 @@ describe('SelectionDrawer', () => {
   it('shows inputted code', () => {
     renderSelectionPanel()
     inputCode('A01')
-    expect(screen.getByText('A01')).toBeInTheDocument()
+    expect(mockScreen).toHaveBeenLastCalledWith(expect.objectContaining({ code: 'A01' }))
   })
 
   it('does not show code if it does not start with "A"', () => {
     renderSelectionPanel()
     inputCode('123')
-    expect(screen.queryByText('123')).toBeFalsy()
+    expect(mockScreen).not.toHaveBeenLastCalledWith(expect.objectContaining({ code: '123' }))
   })
 
   it('only accepts a maximum of 3 character code', () => {
     renderSelectionPanel()
     inputCode('A12345')
-    expect(screen.getByText('A12')).toBeInTheDocument()
+    expect(mockScreen).toHaveBeenLastCalledWith(expect.objectContaining({ code: 'A12' }))
   })
 
   it('calls buy when a 3 length code is inputted with a valid code', () => {
@@ -129,22 +159,34 @@ describe('SelectionDrawer', () => {
     renderSelectionPanel()
     inputCode('A99')
     expect(mockBuy).not.toHaveBeenCalled()
-    expect(screen.queryByText('A99')).toBeFalsy()
+    expect(mockScreen).not.toHaveBeenLastCalledWith(expect.objectContaining({ code: 'A99' }))
   })
 
   it('pressing "C" clears the code', () => {
     renderSelectionPanel()
     inputCode('A1')
-    expect(screen.getByText('A1')).toBeInTheDocument()
+    expect(mockScreen).toHaveBeenLastCalledWith(expect.objectContaining({ code: 'A1' }))
     fireEvent.click(
       screen.getByRole('button', { name: 'Clear' })
     )
-    expect(screen.queryByText('A12')).toBeFalsy()
+    expect(mockScreen).not.toHaveBeenLastCalledWith(expect.objectContaining({ code: 'A1' }))
   })
 
   it('does not accept more than one "A" key', () => {
     renderSelectionPanel()
     inputCode('AA')
-    expect(screen.queryByText('AA')).toBeFalsy()
+    expect(mockScreen).not.toHaveBeenLastCalledWith(expect.objectContaining({ code: 'AA' }))
+  })
+
+  it('pass error message to Screen component', () => {
+    renderSelectionPanel()
+    expect(mockScreen).toHaveBeenLastCalledWith(expect.objectContaining({ error: 'error message' }))
+  })
+
+  it('clears error message on code input', () => {
+    renderSelectionPanel()
+    expect(mockClearError).not.toHaveBeenCalled()
+    inputCode('A')
+    expect(mockClearError).toHaveBeenCalledTimes(1)
   })
 })
