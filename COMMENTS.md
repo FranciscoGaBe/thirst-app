@@ -1,37 +1,7 @@
-# Comments
-Let's start by defining to steps to take and a small description of each.
-
 ## API
-We will start by implementing the API, this way we have everything ready for the webapp.
+A clean architecture approach has been followed to implement the API together with tests. Entities and repositories has been created for drinks and sales to later be implemented using JSON files adapters.
+A migration command has been added to populate the "database" with tables and data.
 
-### Structure
-We will follow an hexagonal structure, in this case we will define 3 main folders:
-__domain__, __aplication__ and __infrastructure__
-
-#### Domain
-This folder will contain our 2 main entities: __drink__ and __sale__
-
-##### Drink
-Contains the following properties: __name__, __price__, __cost__  and __quantity__. Exposes a __removeQuantity__ method.
-The DrinksReposity contains a __getAll__, __getById__, and __update__ methods.
-
-##### Sale
-Contains the following properties: __drinkId__, __quantity__ and __profit__.
-
-#### Application
-Contains use cases for the application: __getAllDrinks__ and __createSale__.
-
-#### Infrastructure
-Contains 2 folders: __controllers__ and __services__.
-
-##### Controllers
-Contains a __drinks__ controller with a `get` __index__ route to get all drinks and a __sales__ controller with a `post` __index__ route to create the sale.
-
-##### Services
-Contains implementations for the repositories using json files for simplicity reasons.
-
-### Migrations
-A migration command un Make will be added to create the "database" and populate with a few drinks.
-
-## Webapp
-To be added...
+# WebApp
+Has been organized following the example on clean architecture in the Frontend given in [INSTRUCTIONS.md](INSTRUCTIONS.md).
+The application UX has been done using a vending machine as inspiration, the user adds money, types a code in the keyboard and the drink is bought if enough money is available.
