@@ -2,7 +2,7 @@
   background-color: #4F4557;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 300px;
   max-width: 100%;
   padding: .75rem .5rem;
   border-radius: .5rem;
@@ -12,19 +12,29 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row-reverse;
+  align-self: center;
+  width: 200px;
+  max-width: 100%;
   margin-top: 1rem;
 }
 
 .keyboard>div {
   width: 33.333%;
-  height: 2rem;
+  height: 2.5rem;
   padding: .15rem;
 }
 
 .keyboard button {
-  background-color: #6D5D6E;
+  background-image: radial-gradient(#4F4557, #393646);
+  box-shadow: 0 1px 0 1px #393646;
+  border: 1px solid #6D5D6E;
   color: white;
   width: 100%;
   height: 100%;
   cursor: pointer;
+  border-radius: .4rem;
+}
+
+.keyboard button:active {
+  box-shadow: none;
 }
